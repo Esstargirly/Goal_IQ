@@ -45,7 +45,6 @@ def k_factor(tournament: str) -> int:
 
 
 def tournament_weight(tournament: str) -> float:
-    """0–1 importance score used as a feature."""
     k = k_factor(tournament)
     return round(k / 60, 4)
 
@@ -78,7 +77,7 @@ def load_data(path: str) -> pd.DataFrame:
     # Tournament weight feature
     df["t_weight"] = df["tournament"].apply(tournament_weight)
 
-    print(f"✅ Loaded {len(df):,} matches  |  "
+    print(f" Loaded {len(df):,} matches  |  "
           f"{df['date'].min().year}–{df['date'].max().year}  |  "
           f"{df['outcome'].value_counts().to_dict()}")
     return df
@@ -387,6 +386,6 @@ if __name__ == "__main__":
     save_artifacts(model, le, df, final_elo, final_form)
 
     print("\n Training complete!")
-    print("   Run `python app.py` to start the server.")
-    print("\n REMINDER: Add a betting disclaimer to the app.")
-    print("   Predictions are probabilistic estimates, not guarantees.\n")
+   # print("   Run `python app.py` to start the server.")
+   # print("\n REMINDER: Add a betting disclaimer to the app.")
+   # print("   Predictions are probabilistic estimates, not guarantees.\n")
