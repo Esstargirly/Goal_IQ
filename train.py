@@ -12,12 +12,14 @@ from collections import defaultdict, deque
 
 warnings.filterwarnings('ignore')
 
-DATA_PATH   = "data/results.csv"
-MODEL_DIR   = "model"
-FORM_WINDOW = 10          # last N matches for form features
-ELO_START   = 1500        # starting ELO for every team
-ELO_D       = 400         # ELO scaling factor (standard)
-EVAL_FROM   = "2018-01-01"  # use post-2018 as test set
+# CONFIG
+DATA_PATH    = "data/results.csv"
+MODEL_DIR    = "model"
+FORM_WINDOW  = 10             
+ELO_START    = 1500           
+ELO_D        = 400            
+TRAIN_FROM   = "2000-01-01"
+EVAL_FROM    = "2022-01-01"   
 
 # Tournament importance → ELO K-factor
 K_MAP = {
@@ -32,7 +34,7 @@ K_MAP = {
     "Confederations Cup":         45,
     "Friendly":                   10,
 }
-K_DEFAULT = 30
+K_DEFAULT = 30  # all other competitive matches
 
 
 def k_factor(tournament: str) -> int:
@@ -48,15 +50,17 @@ def tournament_weight(tournament: str) -> float:
     k = k_factor(tournament)
     return round(k / 60, 4)
 
-
 # LOAD & CLEAN DATA
-
 def load_data(path: str) -> pd.DataFrame:
     df = pd.read_csv(path, parse_dates=["date"])
     df = df.dropna(subset=["home_team","away_team","home_score","away_score"])
     df["home_score"] = df["home_score"].astype(int)
     df["away_score"] = df["away_score"].astype(int)
     df = df.sort_values("date").reset_index(drop=True)
+
+    # ── Filter to modern football era (2000 onwards) ──
+    df = df[df["date"] >= pd.Timestamp(TRAIN_FROM)].reset_index(drop=True)
+    print(f"   → Filtered to {TRAIN_FROM} onwards: {len(df):,} matches remaining")
 
     # Outcome from home team perspective
     def outcome(row):
@@ -82,9 +86,7 @@ def load_data(path: str) -> pd.DataFrame:
           f"{df['outcome'].value_counts().to_dict()}")
     return df
 
-
-# ELO RATINGS
-
+# ELO RATINGS  (computed from scratch)
 def expected_score(r_home, r_away):
     return 1.0 / (1.0 + 10 ** ((r_away - r_home) / ELO_D))
 
@@ -134,9 +136,7 @@ def compute_elo(df: pd.DataFrame):
     print(f"   Top 5: { sorted(final_elo.items(), key=lambda x:-x[1])[:5] }")
     return df, final_elo
 
-
 # RECENT FORM FEATURES
-
 def compute_form(df: pd.DataFrame):
     # team → deque of recent match dicts
     history = defaultdict(lambda: deque(maxlen=FORM_WINDOW))
@@ -154,7 +154,7 @@ def compute_form(df: pd.DataFrame):
 
     def form_stats(q: deque):
         if not q:
-            return 0.33, 1.0, 1.0, 3.0   # neutral defaults
+            return 0.33, 1.0, 1.0, 3.0  
         wins   = sum(1 for m in q if m["outcome"] == "Win")
         draws  = sum(1 for m in q if m["outcome"] == "Draw")
         gf     = sum(m["gf"] for m in q)
@@ -210,9 +210,7 @@ def compute_form(df: pd.DataFrame):
     print(f" Form features computed for {len(final_form):,} teams")
     return df, final_form
 
-
 # HEAD-TO-HEAD FEATURE
-
 def compute_h2h(df: pd.DataFrame):
     # Pre-index all matches by pair for speed
     h2h_map = defaultdict(lambda: {"wins":0, "total":0})
@@ -241,7 +239,6 @@ def compute_h2h(df: pd.DataFrame):
     return df
 
 # TRAIN MODEL
-
 FEATURES = [
     "elo_diff",
     "home_elo",
@@ -267,7 +264,7 @@ def train_model(df: pd.DataFrame):
 
     X = df[FEATURES].fillna(0)
 
-    # ── Time-based split (more realistic than random) ──
+    # ── Time-based split (train on 2000–2021, test on 2022+) ──
     cutoff  = pd.Timestamp(EVAL_FROM)
     mask    = df["date"] < cutoff
     X_train, X_test = X[mask], X[~mask]
@@ -326,7 +323,6 @@ def train_model(df: pd.DataFrame):
     return calibrated, le
 
 # SAVE ALL ARTIFACTS
-
 def save_artifacts(model, le, df, final_elo, final_form):
     os.makedirs(MODEL_DIR, exist_ok=True)
 
@@ -363,12 +359,10 @@ def save_artifacts(model, le, df, final_elo, final_form):
         json.dump(FEATURES, f)
     print(f" Features → model/features.json")
 
-
 # MAIN
-
 if __name__ == "__main__":
     print("=" * 60)
-    print("  GoalIQ — Enhanced Training Pipeline")
+    print("   GoalIQ — Enhanced Training Pipeline")
     print("=" * 60)
 
     if not os.path.exists(DATA_PATH):
@@ -386,6 +380,6 @@ if __name__ == "__main__":
     save_artifacts(model, le, df, final_elo, final_form)
 
     print("\n Training complete!")
-   # print("   Run `python app.py` to start the server.")
-   # print("\n REMINDER: Add a betting disclaimer to the app.")
+    #print("   Run `python app.py` to start the server.")
+   # print("\n  REMINDER: Add a betting disclaimer to the app.")
    # print("   Predictions are probabilistic estimates, not guarantees.\n")
