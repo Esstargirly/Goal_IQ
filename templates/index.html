@@ -3,560 +3,671 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>GoalIQ | World Cup 2026 Predictions</title>
+<title>GoalIQ | Elite Football Intelligence</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  .bg-mesh { background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.02) 1px, transparent 0); background-size: 24px 24px; }
-  @keyframes pulse-live { 0%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.1)} 100%{opacity:1;transform:scale(1)} }
-  .animate-pulse-live { animation: pulse-live 2s infinite; }
-  .glass-panel { background: rgba(18,25,38,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: #0f131c; }
-  ::-webkit-scrollbar-thumb { background: #31353e; border-radius: 10px; }
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-  .fade-up { animation: fadeUp 0.45s ease; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .animate-spin { animation: spin 1s linear infinite; display: inline-block; }
-</style>
 <script id="tailwind-config">
   tailwind.config = {
     darkMode: "class",
     theme: {
       extend: {
         colors: {
-          "secondary-fixed-dim":"#ffb3ae","on-secondary-container":"#ffc7c3","surface-variant":"#31353e",
-          "on-tertiary-container":"#4f3d00","on-surface":"#dfe2ee","on-error-container":"#ffdad6",
-          "error":"#ffb4ab","surface-tint":"#afc6ff","on-tertiary":"#3d2f00",
-          "surface-container-lowest":"#0a0e16","on-tertiary-fixed-variant":"#584400",
-          "tertiary-container":"#d0a600","surface-container":"#1c2028","secondary-container":"#bb001e",
-          "on-error":"#690005","surface-container-high":"#262a33","on-background":"#dfe2ee",
-          "secondary":"#ffb3ae","inverse-surface":"#dfe2ee","on-surface-variant":"#c3c6d3",
-          "tertiary":"#f1c110","surface-dim":"#0f131c","primary":"#afc6ff","primary-fixed-dim":"#afc6ff",
-          "outline":"#8d909d","on-primary-fixed-variant":"#0c4393","error-container":"#93000a",
-          "on-primary":"#002d6c","surface-container-highest":"#31353e","surface":"#0f131c",
-          "tertiary-fixed-dim":"#f0c110","inverse-primary":"#305cac","surface-bright":"#353942",
-          "on-secondary-fixed":"#410004","on-secondary":"#68000c","on-primary-container":"#a4bfff",
-          "tertiary-fixed":"#ffe08b","on-primary-fixed":"#001a43","outline-variant":"#434751",
-          "inverse-on-surface":"#2c3039","on-secondary-fixed-variant":"#930015","on-tertiary-fixed":"#241a00",
-          "background":"#0f131c","primary-fixed":"#d9e2ff","secondary-fixed":"#ffdad7",
-          "primary-container":"#1a4b9b","surface-container-low":"#181c24"
+          "surface":"#0f131c","on-primary-container":"#a4bfff","primary-container":"#1a4b9b",
+          "surface-container-highest":"#31353e","surface-container":"#1c2028","background":"#0f131c",
+          "secondary":"#ffb3ae","surface-container-high":"#262a33","on-tertiary-fixed":"#241a00",
+          "primary":"#afc6ff","tertiary-fixed":"#ffe08b","error":"#ffb4ab","tertiary":"#f1c110",
+          "surface-dim":"#0f131c","border-glass":"rgba(255,255,255,0.12)","on-primary":"#002d6c",
+          "on-secondary":"#68000c","on-error":"#690005","on-primary-fixed":"#001a43",
+          "on-secondary-fixed":"#410004","on-tertiary-container":"#4f3d00","primary-fixed-dim":"#afc6ff",
+          "on-surface":"#dfe2ee","secondary-container":"#bb001e","inverse-primary":"#305cac",
+          "on-secondary-container":"#ffc7c3","surface-container-lowest":"#0a0e16",
+          "tertiary-container":"#d0a600","on-background":"#dfe2ee","surface-glass":"rgba(255,255,255,0.05)",
+          "surface-bright":"#353942","primary-fixed":"#d9e2ff","inverse-on-surface":"#2c3039",
+          "on-primary-fixed-variant":"#0c4393","outline":"#8d909d","outline-variant":"#434751",
+          "on-tertiary":"#3d2f00","on-secondary-fixed-variant":"#930015","on-surface-variant":"#c3c6d3",
+          "inverse-surface":"#dfe2ee","surface-variant":"#31353e","live-red":"#FF3B30",
+          "error-container":"#93000a","secondary-fixed":"#ffdad7","surface-container-low":"#181c24",
+          "pitch-green":"#24D676","secondary-fixed-dim":"#ffb3ae","on-tertiary-fixed-variant":"#584400",
+          "tertiary-fixed-dim":"#f0c110","surface-tint":"#afc6ff"
         },
-        borderRadius: { DEFAULT:"0.125rem", lg:"0.25rem", xl:"0.5rem", full:"0.75rem" },
-        spacing: { xs:"8px", lg:"32px", md:"24px", sm:"16px", xl:"48px", "container-max":"1280px", base:"4px", gutter:"20px" },
-        fontFamily: {
-          "headline-sm":["Montserrat"],"headline-md":["Montserrat"],"body-md":["Inter"],
-          "display-lg-mobile":["Montserrat"],"body-sm":["Inter"],"display-lg":["Montserrat"],
-          "headline-lg":["Montserrat"],"body-lg":["Inter"],"label-bold":["Inter"],"stats-number":["Montserrat"]
+        borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+        spacing:{"card-padding":"16px","container-margin":"20px","gutter":"12px","unit":"8px"},
+        fontFamily:{
+          "scoreboard-num":["Sora"],"headline-lg-mobile":["Sora"],"odds-val":["Inter"],
+          "label-caps":["JetBrains Mono"],"headline-lg":["Sora"],"body-md":["Inter"],"display-xl":["Sora"]
         },
-        fontSize: {
-          "headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}],
-          "headline-md":["24px",{lineHeight:"32px",fontWeight:"700"}],
-          "body-md":["16px",{lineHeight:"24px",fontWeight:"400"}],
-          "display-lg-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.01em",fontWeight:"800"}],
-          "body-sm":["14px",{lineHeight:"20px",fontWeight:"400"}],
-          "display-lg":["48px",{lineHeight:"56px",letterSpacing:"-0.02em",fontWeight:"800"}],
-          "headline-lg":["32px",{lineHeight:"40px",fontWeight:"700"}],
-          "body-lg":["18px",{lineHeight:"28px",fontWeight:"400"}],
-          "label-bold":["12px",{lineHeight:"16px",letterSpacing:"0.05em",fontWeight:"700"}],
-          "stats-number":["24px",{lineHeight:"24px",fontWeight:"800"}]
+        fontSize:{
+          "scoreboard-num":["40px",{lineHeight:"1",fontWeight:"600"}],
+          "headline-lg-mobile":["26px",{lineHeight:"1.2",fontWeight:"700"}],
+          "odds-val":["18px",{lineHeight:"1",fontWeight:"700"}],
+          "label-caps":["12px",{lineHeight:"1.2",letterSpacing:"0.1em",fontWeight:"600"}],
+          "headline-lg":["32px",{lineHeight:"1.2",fontWeight:"700"}],
+          "body-md":["16px",{lineHeight:"1.6",fontWeight:"400"}],
+          "display-xl":["48px",{lineHeight:"1.1",letterSpacing:"-0.02em",fontWeight:"800"}]
         }
       }
     }
   }
 </script>
+<style>
+  body { background-color:#0f131c; color:#dfe2ee; overflow-x:hidden; }
+  .glass-panel { background:rgba(255,255,255,0.05); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.12); }
+  .hex-bg { background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill-opacity='0.03' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E"); }
+  .pulse-live { animation:pulse 2s infinite; }
+  @keyframes pulse { 0%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.1)} 100%{opacity:1;transform:scale(1)} }
+  .stadium-glow { background:radial-gradient(circle at top center,rgba(175,198,255,0.15) 0%,rgba(15,19,28,0) 70%); }
+  .card-hover:hover { border-color:rgba(175,198,255,0.4); background:rgba(255,255,255,0.08); transform:translateY(-4px); }
+  .hide-scrollbar::-webkit-scrollbar { display:none; }
+  .hide-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes countUp { from{opacity:0} to{opacity:1} }
+  @keyframes barGrow { from{width:0%} to{width:var(--target-width)} }
+  .fade-up { animation:fadeUp 0.5s ease forwards; }
+  .stagger-1 { animation:fadeUp 0.5s 0.1s ease both; }
+  .stagger-2 { animation:fadeUp 0.5s 0.2s ease both; }
+  .stagger-3 { animation:fadeUp 0.5s 0.3s ease both; }
+  .stagger-4 { animation:fadeUp 0.5s 0.4s ease both; }
+  .selected-card { border-color:#f1c110 !important; box-shadow:0 0 20px rgba(241,193,16,0.3); }
+  .team-btn:hover .team-circle { transform:scale(1.1); }
+  .team-circle { transition:transform 0.2s ease; }
+  /* Modal bottom sheet */
+  .modal-sheet { transform:translateY(100%); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+  .modal-sheet.open { transform:translateY(0); }
+  .modal-overlay { opacity:0; transition:opacity 0.3s ease; pointer-events:none; }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+  /* Loading sequence */
+  @keyframes spin { to{transform:rotate(360deg)} }
+  .spin { animation:spin 1s linear infinite; display:inline-block; }
+  body { min-height:max(884px,100dvh); }
+</style>
 </head>
-<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<body class="font-body-md text-on-background min-h-screen">
 
-<!-- ── NAV ── -->
-<header class="bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm sticky top-0 z-50">
-  <div class="flex justify-between items-center w-full px-md md:px-xl py-xs max-w-container-max mx-auto">
-    <div class="flex items-center gap-md">
-      <span class="font-headline-md text-primary font-black tracking-widest">GOAL<span class="text-tertiary">IQ</span></span>
+<!-- WebGL Background Shader -->
+<div class="fixed inset-0 w-full h-full z-0 pointer-events-none opacity-40">
+<canvas id="shader-canvas" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function(){
+  const canvas=document.getElementById('shader-canvas');
+  function syncSize(){const w=canvas.clientWidth||1280,h=canvas.clientHeight||720;if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}}
+  if(typeof ResizeObserver!=='undefined')new ResizeObserver(syncSize).observe(canvas);
+  syncSize();
+  const gl=canvas.getContext('webgl')||canvas.getContext('experimental-webgl');
+  if(!gl)return;
+  const vs=`attribute vec2 a_position;varying vec2 v_texCoord;void main(){v_texCoord=a_position*0.5+0.5;gl_Position=vec4(a_position,0.0,1.0);}`;
+  const fs=`precision highp float;uniform float u_time;uniform vec2 u_resolution;uniform vec2 u_mouse;varying vec2 v_texCoord;
+  float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+  void main(){vec2 uv=v_texCoord;vec2 p=(v_texCoord-0.5)*2.0;p.x*=u_resolution.x/u_resolution.y;
+  vec3 color=mix(vec3(0.031,0.047,0.078),vec3(0.012,0.016,0.024),uv.y);
+  for(float i=0.0;i<4.0;i++){float beamPos=fract(0.2+i*0.2+sin(u_time*0.2+i)*0.05);float beamWidth=0.05;float beamDist=abs(uv.x-beamPos);float intensity=smoothstep(beamWidth,0.0,beamDist)*(1.0-uv.y)*0.2;color+=vec3(0.1,0.3,0.6)*intensity;}
+  vec2 r=uv*40.0;float h=hash(floor(r));if(h>0.98)color+=0.02;
+  float glow=smoothstep(1.0,0.0,length(vec2(p.x,p.y-1.0)))*0.15;color+=vec3(0.1,0.3,0.6)*glow;
+  gl_FragColor=vec4(color,1.0);}`;
+  function cs(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+  const prog=gl.createProgram();
+  gl.attachShader(prog,cs(gl.VERTEX_SHADER,vs));gl.attachShader(prog,cs(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(prog);gl.useProgram(prog);
+  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const pos=gl.getAttribLocation(prog,'a_position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+  const uTime=gl.getUniformLocation(prog,'u_time'),uRes=gl.getUniformLocation(prog,'u_resolution'),uMouse=gl.getUniformLocation(prog,'u_mouse');
+  let mouse={x:canvas.width/2,y:canvas.height/2};
+  window.addEventListener('mousemove',(e)=>{const rect=canvas.getBoundingClientRect();if(rect.width&&rect.height){mouse.x=(e.clientX-rect.left)/rect.width*canvas.width;mouse.y=(1-(e.clientY-rect.top)/rect.height)*canvas.height;}});
+  function render(t){if(typeof ResizeObserver==='undefined')syncSize();gl.viewport(0,0,canvas.width,canvas.height);if(uTime)gl.uniform1f(uTime,t*0.001);if(uRes)gl.uniform2f(uRes,canvas.width,canvas.height);if(uMouse)gl.uniform2f(uMouse,mouse.x,mouse.y);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(render);}
+  render(0);
+})();
+</script>
+</div>
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-surface-glass backdrop-blur-xl border-b border-white/10 shadow-none">
+  <div class="flex items-center justify-between px-container-margin py-4 max-w-7xl mx-auto">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">sports_soccer</span>
+      <h1 class="font-headline-lg-mobile font-bold text-primary">GoalIQ</h1>
     </div>
-    <div class="hidden lg:flex items-center gap-lg">
-      <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-bold text-label-bold" href="#">HOME</a>
-      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-bold text-label-bold" href="#">MATCHES</a>
-      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-bold text-label-bold" href="#">PREDICTIONS</a>
-      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-bold text-label-bold" href="#">STATS</a>
-    </div>
-    <div class="flex items-center gap-sm">
-      <div class="bg-tertiary-container/20 text-tertiary px-sm py-xs rounded-full flex items-center gap-xs border border-tertiary/30">
-        <span class="material-symbols-outlined text-[18px]">sports_soccer</span>
-        <span class="font-label-bold text-label-bold uppercase">2026 World Cup</span>
-      </div>
-      <button class="material-symbols-outlined lg:hidden text-on-surface">menu</button>
-    </div>
+    <button class="font-label-caps text-label-caps text-primary active:scale-95 duration-200 uppercase tracking-widest px-3 py-1 border border-primary/20 rounded">
+      ⚽ FIFA 2026
+    </button>
   </div>
 </header>
 
-<main class="relative">
-  <!-- ── HERO SECTION ── -->
-  <section class="relative min-h-[90vh] bg-surface-container-lowest flex flex-col items-center pt-md pb-xl px-md overflow-hidden">
-    <div class="absolute inset-0 bg-mesh pointer-events-none opacity-40"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#0a0e16_100%)]"></div>
-    <!-- Trophy watermark -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none opacity-5">
-      <span style="font-size:22vw;line-height:1;font-family:Montserrat,sans-serif;font-weight:900;letter-spacing:-4px;color:white;">26</span>
-    </div>
+<main class="relative z-10 pt-20 pb-32 hex-bg min-h-screen stadium-glow">
 
-    <!-- ── MATCH CARDS STRIP ── -->
-    <div class="w-full max-w-container-max relative z-10 mb-xl">
-      <p class="text-on-surface-variant font-label-bold text-label-bold uppercase mb-sm" id="strip-label">Loading matches…</p>
-      <div class="flex gap-md overflow-x-auto pb-md no-scrollbar snap-x" id="matches-strip">
-        <!-- Populated by JS -->
-        <div class="flex-shrink-0 w-[300px] md:w-[340px] glass-panel p-md rounded-xl animate-pulse">
-          <div class="h-4 bg-surface-container-high rounded w-1/2 mb-sm"></div>
-          <div class="h-16 bg-surface-container-high rounded"></div>
-        </div>
-        <div class="flex-shrink-0 w-[300px] md:w-[340px] glass-panel p-md rounded-xl animate-pulse">
-          <div class="h-4 bg-surface-container-high rounded w-1/2 mb-sm"></div>
-          <div class="h-16 bg-surface-container-high rounded"></div>
-        </div>
-        <div class="flex-shrink-0 w-[300px] md:w-[340px] glass-panel p-md rounded-xl animate-pulse">
-          <div class="h-4 bg-surface-container-high rounded w-1/2 mb-sm"></div>
-          <div class="h-16 bg-surface-container-high rounded"></div>
-        </div>
+  <!-- TODAY'S MATCHES -->
+  <section class="mt-10">
+    <div class="px-container-margin flex items-center justify-between mb-4">
+      <h3 class="font-headline-lg text-headline-lg" id="matches-title">Loading…</h3>
+      <span class="font-label-caps text-label-caps text-primary cursor-pointer">View All</span>
+    </div>
+    <div class="flex overflow-x-auto gap-gutter px-container-margin pb-6 hide-scrollbar" id="matches-strip">
+      <!-- Skeleton loaders -->
+      <div class="flex-none w-[300px] glass-panel rounded-2xl p-card-padding animate-pulse">
+        <div class="h-3 bg-surface-container-high rounded w-2/3 mb-4"></div>
+        <div class="h-16 bg-surface-container-high rounded mb-4"></div>
+        <div class="grid grid-cols-2 gap-2"><div class="h-10 bg-surface-container-high rounded"></div><div class="h-10 bg-surface-container-high rounded"></div></div>
+      </div>
+      <div class="flex-none w-[300px] glass-panel rounded-2xl p-card-padding animate-pulse">
+        <div class="h-3 bg-surface-container-high rounded w-2/3 mb-4"></div>
+        <div class="h-16 bg-surface-container-high rounded mb-4"></div>
+        <div class="grid grid-cols-2 gap-2"><div class="h-10 bg-surface-container-high rounded"></div><div class="h-10 bg-surface-container-high rounded"></div></div>
       </div>
     </div>
+  </section>
 
-    <!-- ── PREDICTION PANEL ── -->
-    <div class="relative z-20 w-full max-w-2xl text-center">
-      <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-sm text-primary uppercase tracking-tight">Predict the Glory</h1>
-      <p class="font-body-lg text-body-lg text-on-surface-variant mb-xl max-w-lg mx-auto">Leverage GoalIQ's real-time analytics to forecast World Cup outcomes with unmatched precision.</p>
 
-      <div class="glass-panel p-lg rounded-2xl shadow-2xl border-white/5 relative overflow-hidden">
-        <div class="absolute -right-20 -top-20 w-40 h-40 bg-primary/10 blur-[80px] rounded-full"></div>
-        <div class="absolute -left-20 -bottom-20 w-40 h-40 bg-tertiary/10 blur-[80px] rounded-full"></div>
+  <!-- PREDICTION PANEL -->
+  <section class="px-container-margin mt-6 relative overflow-hidden" id="prediction-section">
+    <div class="absolute inset-0 flex justify-center items-center opacity-[0.03] pointer-events-none -z-10">
+      <span class="material-symbols-outlined text-[300px]" style="font-variation-settings:'FILL' 1;">emoji_events</span>
+    </div>
 
-        <div class="flex flex-col md:flex-row items-center gap-lg mb-lg">
-          <!-- Team A -->
-          <div class="flex-1 w-full text-left">
-            <label class="block font-label-bold text-label-bold text-on-surface-variant mb-xs ml-1">TEAM A</label>
-            <div class="relative">
-              <select id="team-a" class="w-full bg-surface-container border border-outline-variant/30 text-on-surface rounded-xl py-md px-md appearance-none focus:border-primary focus:ring-0 transition-colors cursor-pointer">
-                <option value="">Select country…</option>
-                {% for team in teams %}
-                <option value="{{ team }}">{{ team }}</option>
-                {% endfor %}
-              </select>
-              <span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
-            </div>
+    <div class="glass-panel rounded-3xl p-6 md:p-10 max-w-4xl mx-auto flex flex-col items-center text-center">
+      <div class="mb-2">
+        <span class="font-label-caps text-label-caps text-tertiary uppercase">Global Tournament · 2026</span>
+      </div>
+      <h2 class="font-display-xl text-display-xl mb-2 text-on-surface">Next-Gen Predictions</h2>
+      <p class="text-on-surface-variant text-sm mb-8 max-w-md">Select two nations and let GoalIQ's AI engine — trained on 20+ years of international football — forecast the outcome.</p>
+
+      <!-- Match selected message -->
+      <div id="match-selected-msg" class="hidden mb-4 px-4 py-2 rounded-full bg-tertiary/20 border border-tertiary/40 text-tertiary text-sm font-bold">
+        ⚽ Match selected. Ready for prediction.
+      </div>
+
+      <div class="w-full grid grid-cols-1 md:grid-cols-3 items-center gap-6 mb-6">
+        <!-- Team A -->
+        <button class="team-btn flex flex-col items-center gap-3 group cursor-pointer" onclick="openModal('a')">
+          <div class="team-circle w-20 h-20 rounded-full glass-panel flex items-center justify-center text-5xl border-2 border-transparent" id="circle-a">
+            <span id="flag-display-a">🏳️</span>
           </div>
+          <span class="font-headline-lg-mobile" id="name-display-a">Select Team A</span>
+          <span class="material-symbols-outlined text-primary">expand_more</span>
+        </button>
 
-          <!-- VS Badge -->
-          <div class="flex-shrink-0 bg-primary-container text-on-primary-container w-14 h-14 rounded-full flex items-center justify-center font-bold text-headline-sm shadow-lg border-4 border-surface shadow-primary/20">VS</div>
-
-          <!-- Team B -->
-          <div class="flex-1 w-full text-left">
-            <label class="block font-label-bold text-label-bold text-on-surface-variant mb-xs ml-1">TEAM B</label>
-            <div class="relative">
-              <select id="team-b" class="w-full bg-surface-container border border-outline-variant/30 text-on-surface rounded-xl py-md px-md appearance-none focus:border-primary focus:ring-0 transition-colors cursor-pointer">
-                <option value="">Select country…</option>
-                {% for team in teams %}
-                <option value="{{ team }}">{{ team }}</option>
-                {% endfor %}
-              </select>
-              <span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
-            </div>
+        <!-- VS -->
+        <div class="flex justify-center">
+          <div class="w-16 h-16 rounded-full bg-surface-container-highest border border-white/10 flex items-center justify-center">
+            <span class="font-scoreboard-num text-2xl text-primary">VS</span>
           </div>
         </div>
 
-        <!-- Error message -->
-        <div id="error-msg" class="hidden mb-md bg-error-container/20 border border-error/30 text-error rounded-xl px-md py-sm text-body-sm font-medium"></div>
-
-        <button class="w-full bg-tertiary text-on-tertiary-fixed font-headline-sm text-headline-sm py-md rounded-xl shadow-xl shadow-tertiary/20 hover:-translate-y-0.5 hover:shadow-tertiary/40 active:scale-95 transition-all flex items-center justify-center gap-md" id="predictBtn">
-          <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">bolt</span>
-          PREDICT MATCH
+        <!-- Team B -->
+        <button class="team-btn flex flex-col items-center gap-3 group cursor-pointer" onclick="openModal('b')">
+          <div class="team-circle w-20 h-20 rounded-full glass-panel flex items-center justify-center text-5xl border-2 border-transparent" id="circle-b">
+            <span id="flag-display-b">🏳️</span>
+          </div>
+          <span class="font-headline-lg-mobile" id="name-display-b">Select Team B</span>
+          <span class="material-symbols-outlined text-primary">expand_more</span>
         </button>
       </div>
+
+      <!-- Error -->
+      <div id="pred-error" class="hidden w-full mb-4 px-4 py-3 rounded-xl bg-live-red/10 border border-live-red/30 text-live-red text-sm font-bold"></div>
+
+      <!-- Predict Button -->
+      <button id="predict-btn" onclick="runPrediction()"
+        class="w-full md:w-auto px-10 py-4 rounded-xl bg-tertiary text-on-tertiary-fixed font-bold font-headline-lg-mobile transition-all hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(241,193,16,0.3)] flex items-center justify-center gap-2 mx-auto">
+        <span class="material-symbols-outlined">bolt</span>
+        PREDICT MATCH
+      </button>
+
+      <!-- Loading sequence -->
+      <div id="loading-seq" class="hidden w-full mt-6">
+        <div class="flex flex-col items-center gap-3">
+          <span class="material-symbols-outlined text-primary text-4xl spin">refresh</span>
+          <p id="loading-msg" class="font-label-caps text-label-caps text-primary tracking-widest"></p>
+          <div class="w-full max-w-xs bg-surface-container-highest rounded-full h-1 overflow-hidden">
+            <div id="loading-bar" class="h-full bg-primary rounded-full transition-all duration-500" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ── RESULTS SECTION ── -->
-  <section class="hidden py-xl px-md bg-surface-container-low border-t border-outline-variant/20 fade-up" id="resultsSection">
-    <div class="max-w-container-max mx-auto">
+  <!-- RESULTS SECTION -->
+  <section id="results-section" class="hidden px-container-margin mt-8 max-w-4xl mx-auto">
 
-      <!-- Outcome headline -->
-      <div class="text-center mb-xl">
-        <span class="text-tertiary font-label-bold text-label-bold uppercase tracking-widest">Prediction Outcome</span>
-        <div class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-widest mt-xs" id="result-matchup">— vs —</div>
-        <h2 class="font-display-lg text-display-lg-mobile md:text-display-lg mt-xs" id="result-headline">—</h2>
-        <p class="text-on-surface-variant font-label-bold text-label-bold mt-xs" id="result-confidence">—</p>
-      </div>
+    <!-- Main outcome card -->
+    <div class="glass-panel rounded-3xl p-6 md:p-8 mb-gutter text-center stagger-1" id="outcome-card">
+      <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Prediction Outcome</span>
+      <div class="font-label-caps text-label-caps text-on-surface-variant mt-1" id="r-matchup">— vs —</div>
+      <div class="font-display-xl text-display-xl my-3" id="r-headline">—</div>
+      <div class="font-label-caps text-label-caps text-on-surface-variant" id="r-confidence">—% confidence</div>
 
-      <!-- Probability bars + stat cards -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-lg mb-xl">
-
-        <!-- Probability bars -->
-        <div class="lg:col-span-2 glass-panel p-lg rounded-2xl">
-          <h3 class="font-headline-sm text-headline-sm mb-lg flex items-center gap-sm">
-            <span class="material-symbols-outlined text-primary">analytics</span>
-            Win Probability
-          </h3>
-          <div class="space-y-lg">
-            <div>
-              <div class="flex justify-between mb-xs">
-                <span class="font-label-bold text-on-surface" id="bar-label-win">WIN</span>
-                <span class="font-stats-number text-primary" id="bar-pct-win">—</span>
-              </div>
-              <div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
-                <div class="h-full bg-primary rounded-full transition-all duration-1000" id="bar-win" style="width:0%"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-xs">
-                <span class="font-label-bold text-on-surface-variant">DRAW</span>
-                <span class="font-stats-number text-on-surface-variant" id="bar-pct-draw">—</span>
-              </div>
-              <div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
-                <div class="h-full bg-outline-variant rounded-full transition-all duration-1000" id="bar-draw" style="width:0%"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-xs">
-                <span class="font-label-bold text-on-surface-variant" id="bar-label-loss">LOSS</span>
-                <span class="font-stats-number text-tertiary" id="bar-pct-loss">—</span>
-              </div>
-              <div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
-                <div class="h-full bg-tertiary rounded-full transition-all duration-1000" id="bar-loss" style="width:0%"></div>
-              </div>
-            </div>
+      <!-- Probability bars -->
+      <div class="mt-6 space-y-3 text-left max-w-sm mx-auto">
+        <div>
+          <div class="flex justify-between mb-1">
+            <span class="font-label-caps text-label-caps text-on-surface" id="bar-label-win">WIN</span>
+            <span class="font-odds-val text-odds-val text-primary text-sm" id="bar-pct-win">0%</span>
+          </div>
+          <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+            <div id="bar-win" class="h-full bg-primary rounded-full transition-all duration-1000" style="width:0%"></div>
           </div>
         </div>
-
-        <!-- Stat cards -->
-        <div class="space-y-lg">
-          <!-- ELO Rating card -->
-          <div class="bg-surface-container p-md rounded-xl border border-outline-variant/10">
-            <div class="flex items-center justify-between mb-md">
-              <span class="font-label-bold text-on-surface-variant uppercase">ELO Rating</span>
-              <span class="material-symbols-outlined text-on-surface-variant">leaderboard</span>
-            </div>
-            <div class="flex justify-between items-end">
-              <div class="text-center">
-                <div class="font-label-bold text-on-surface-variant mb-xs" id="elo-label-a">—</div>
-                <div class="font-stats-number text-primary text-[24px]" id="elo-val-a">—</div>
-              </div>
-              <div class="text-center">
-                <div class="font-label-bold text-on-surface-variant mb-xs" id="elo-label-b">—</div>
-                <div class="font-stats-number text-on-surface text-[24px]" id="elo-val-b">—</div>
-              </div>
-            </div>
+        <div>
+          <div class="flex justify-between mb-1">
+            <span class="font-label-caps text-label-caps text-on-surface-variant">DRAW</span>
+            <span class="font-odds-val text-odds-val text-on-surface-variant text-sm" id="bar-pct-draw">0%</span>
           </div>
-          <!-- Goals card -->
-          <div class="bg-surface-container p-md rounded-xl border border-outline-variant/10">
-            <div class="flex items-center justify-between mb-md">
-              <span class="font-label-bold text-on-surface-variant uppercase">Avg Goals / Game</span>
-              <span class="material-symbols-outlined text-on-surface-variant">sports_soccer</span>
-            </div>
-            <div class="flex justify-between items-end">
-              <div class="text-center">
-                <div class="font-label-bold text-on-surface-variant mb-xs" id="goals-label-a">—</div>
-                <div class="font-stats-number text-primary text-[24px]" id="goals-val-a">—</div>
-              </div>
-              <div class="text-center">
-                <div class="font-label-bold text-on-surface-variant mb-xs" id="goals-label-b">—</div>
-                <div class="font-stats-number text-on-surface text-[24px]" id="goals-val-b">—</div>
-              </div>
-            </div>
+          <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+            <div id="bar-draw" class="h-full bg-outline-variant rounded-full transition-all duration-1000" style="width:0%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-1">
+            <span class="font-label-caps text-label-caps text-on-surface-variant" id="bar-label-loss">LOSS</span>
+            <span class="font-odds-val text-odds-val text-tertiary text-sm" id="bar-pct-loss">0%</span>
+          </div>
+          <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+            <div id="bar-loss" class="h-full bg-tertiary rounded-full transition-all duration-1000" style="width:0%"></div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- H2H Table -->
-      <div class="glass-panel rounded-2xl overflow-hidden">
-        <div class="p-lg border-b border-outline-variant/10 flex items-center justify-between">
-          <h3 class="font-headline-sm text-headline-sm">Head-to-Head History</h3>
-          <span class="text-on-surface-variant text-body-sm" id="h2h-summary">—</span>
+    <!-- Stats row -->
+    <div class="grid grid-cols-2 gap-gutter mb-gutter stagger-2">
+      <div class="glass-panel rounded-2xl p-4">
+        <div class="font-label-caps text-label-caps text-on-surface-variant mb-3 flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">leaderboard</span> ELO RATING
         </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left">
-            <thead class="bg-surface-container-high/50 text-on-surface-variant font-label-bold text-label-bold">
-              <tr>
-                <th class="px-lg py-md">YEAR</th>
-                <th class="px-lg py-md">HOME</th>
-                <th class="px-lg py-md">SCORE</th>
-                <th class="px-lg py-md">AWAY</th>
-                <th class="px-lg py-md text-right">RESULT</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-outline-variant/10 font-body-sm" id="h2h-tbody">
-              <tr><td colspan="5" class="px-lg py-md text-on-surface-variant">No previous encounters</td></tr>
-            </tbody>
-          </table>
+        <div class="flex justify-between">
+          <div class="text-center">
+            <div class="text-xs text-on-surface-variant mb-1" id="elo-name-a">—</div>
+            <div class="font-odds-val text-primary text-xl" id="elo-val-a">—</div>
+          </div>
+          <div class="text-center">
+            <div class="text-xs text-on-surface-variant mb-1" id="elo-name-b">—</div>
+            <div class="font-odds-val text-on-surface text-xl" id="elo-val-b">—</div>
+          </div>
         </div>
       </div>
+      <div class="glass-panel rounded-2xl p-4">
+        <div class="font-label-caps text-label-caps text-on-surface-variant mb-3 flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">sports_soccer</span> AVG GOALS
+        </div>
+        <div class="flex justify-between">
+          <div class="text-center">
+            <div class="text-xs text-on-surface-variant mb-1" id="goals-name-a">—</div>
+            <div class="font-odds-val text-primary text-xl" id="goals-val-a">—</div>
+          </div>
+          <div class="text-center">
+            <div class="text-xs text-on-surface-variant mb-1" id="goals-name-b">—</div>
+            <div class="font-odds-val text-on-surface text-xl" id="goals-val-b">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <!-- Disclaimer -->
-      <p class="text-center text-on-surface-variant font-body-sm text-body-sm mt-lg opacity-60">
-        ⚠️ Predictions are AI-based estimates, not guaranteed outcomes. Please bet responsibly.
-      </p>
+    <!-- H2H -->
+    <div class="glass-panel rounded-2xl overflow-hidden stagger-3">
+      <div class="p-4 border-b border-white/10 flex items-center justify-between">
+        <span class="font-headline-lg-mobile text-base font-bold">Head-to-Head</span>
+        <span class="font-label-caps text-label-caps text-on-surface-variant text-xs" id="h2h-summary">—</span>
+      </div>
+      <div class="overflow-x-auto hide-scrollbar">
+        <table class="w-full text-sm">
+          <thead class="bg-surface-container/50 text-on-surface-variant">
+            <tr>
+              <th class="px-4 py-3 text-left font-label-caps text-label-caps text-xs">YEAR</th>
+              <th class="px-4 py-3 text-left font-label-caps text-label-caps text-xs">HOME</th>
+              <th class="px-4 py-3 text-center font-label-caps text-label-caps text-xs">SCORE</th>
+              <th class="px-4 py-3 text-left font-label-caps text-label-caps text-xs">AWAY</th>
+              <th class="px-4 py-3 text-right font-label-caps text-label-caps text-xs">RESULT</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5" id="h2h-tbody">
+            <tr><td colspan="5" class="px-4 py-4 text-on-surface-variant text-center text-sm">No previous encounters</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <p class="text-center text-on-surface-variant text-xs mt-4 opacity-50 stagger-4">
+      ⚠️ AI-based estimates only. Not guaranteed outcomes. Please bet responsibly.
+    </p>
+  </section>
+
+  <!-- INTELLIGENCE ALERT -->
+  <section class="px-container-margin mt-4 max-w-4xl mx-auto">
+    <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-tertiary">
+      <div class="flex items-start gap-4">
+        <div class="p-2 rounded-xl bg-tertiary/10 text-tertiary flex-shrink-0">
+          <span class="material-symbols-outlined">trending_up</span>
+        </div>
+        <div>
+          <h4 class="font-bold text-base mb-1">Intelligence Alert</h4>
+          <p class="text-on-surface-variant text-sm" id="intel-msg">
+            Tournament begins June 11 · Mexico vs South Africa opens Group A at Estadio Azteca. 48 nations compete for the most prestigious trophy in world football.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
+
 </main>
 
-<!-- ── FOOTER ── -->
-<footer class="bg-surface-dim border-t border-outline-variant/10 mt-xl">
-  <div class="w-full py-xl px-md flex flex-col md:flex-row justify-between items-center gap-md max-w-container-max mx-auto">
-    <div class="flex flex-col items-center md:items-start gap-xs">
-      <span class="font-headline-md text-primary font-black tracking-widest opacity-70 hover:opacity-100 transition-all cursor-pointer">GOAL<span class="text-tertiary">IQ</span></span>
-      <p class="text-on-surface-variant font-body-sm text-body-sm mt-xs">© 2026 GoalIQ World Cup Analytics. All rights reserved.</p>
-    </div>
-    <div class="flex gap-lg">
-      <a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-bold text-label-bold" href="#">TERMS</a>
-      <a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-bold text-label-bold" href="#">PRIVACY</a>
-      <a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-bold text-label-bold" href="#">DATA API</a>
-      <a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-bold text-label-bold" href="#">SUPPORT</a>
-    </div>
-    <div class="flex gap-md">
-      <button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-primary/20 transition-all">
-        <span class="material-symbols-outlined text-[20px]">share</span>
-      </button>
-      <button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-primary/20 transition-all">
-        <span class="material-symbols-outlined text-[20px]">notifications</span>
-      </button>
+<!-- Bottom Nav -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface-glass backdrop-blur-xl border-t border-white/10">
+  <div class="flex justify-around items-center px-4 py-3 pb-6 max-w-lg mx-auto">
+    <button onclick="document.getElementById('matches-strip').scrollIntoView({behavior:'smooth'})" class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150">
+      <span class="material-symbols-outlined">stadium</span>
+      <span class="font-label-caps text-label-caps text-xs">Matches</span>
+    </button>
+    <button onclick="document.getElementById('prediction-section').scrollIntoView({behavior:'smooth'})" class="flex flex-col items-center bg-primary-container text-on-primary-container rounded-xl px-3 py-1 active:scale-90 duration-150">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">query_stats</span>
+      <span class="font-label-caps text-label-caps text-xs">Predict</span>
+    </button>
+    <button class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150">
+      <span class="material-symbols-outlined">emoji_events</span>
+      <span class="font-label-caps text-label-caps text-xs">Leaders</span>
+    </button>
+    <button class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150">
+      <span class="material-symbols-outlined">person</span>
+      <span class="font-label-caps text-label-caps text-xs">Profile</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Team Selection Modal (Bottom Sheet) -->
+<div id="modal-overlay" class="modal-overlay fixed inset-0 bg-black/60 z-[60] backdrop-blur-sm" onclick="closeModal()"></div>
+<div id="modal-sheet" class="modal-sheet fixed bottom-0 left-0 right-0 z-[70] bg-surface-container rounded-t-3xl max-h-[80vh] flex flex-col">
+  <div class="p-4 border-b border-white/10">
+    <div class="w-10 h-1 bg-surface-container-highest rounded-full mx-auto mb-4"></div>
+    <p class="font-label-caps text-label-caps text-on-surface-variant text-center mb-3" id="modal-title">SELECT TEAM</p>
+    <div class="relative">
+      <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+      <input id="modal-search" type="text" placeholder="Search country…" oninput="filterModal()"
+        class="w-full bg-surface-container-highest border border-white/10 rounded-xl pl-9 pr-4 py-3 text-sm text-on-surface focus:outline-none focus:border-primary placeholder-on-surface-variant">
     </div>
   </div>
-</footer>
+  <div id="modal-list" class="overflow-y-auto flex-1 p-2"></div>
+</div>
 
 <script>
 // ── FLAG MAP ──
 const FLAGS = {
-  "Mexico":"🇲🇽","South Africa":"🇿🇦","South Korea":"🇰🇷","Czechia":"🇨🇿",
-  "Canada":"🇨🇦","Bosnia and Herzegovina":"🇧🇦","United States":"🇺🇸","USA":"🇺🇸",
-  "Paraguay":"🇵🇾","Qatar":"🇶🇦","Switzerland":"🇨🇭","Brazil":"🇧🇷","Morocco":"🇲🇦",
-  "Scotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","Haiti":"🇭🇹","Germany":"🇩🇪","Curacao":"🇨🇼",
-  "Ecuador":"🇪🇨","Ivory Coast":"🇨🇮","Netherlands":"🇳🇱","Japan":"🇯🇵",
-  "Tunisia":"🇹🇳","Ukraine":"🇺🇦","Belgium":"🇧🇪","Iran":"🇮🇷","Egypt":"🇪🇬",
-  "New Zealand":"🇳🇿","Spain":"🇪🇸","Cape Verde":"🇨🇻","Uruguay":"🇺🇾",
-  "Saudi Arabia":"🇸🇦","France":"🇫🇷","Senegal":"🇸🇳","Norway":"🇳🇴","Iraq":"🇮🇶",
-  "Argentina":"🇦🇷","Jordan":"🇯🇴","Colombia":"🇨🇴","Uzbekistan":"🇺🇿",
-  "Portugal":"🇵🇹","Angola":"🇦🇴","Denmark":"🇩🇰","Italy":"🇮🇹",
-  "Australia":"🇦🇺","Turkiye":"🇹🇷","Congo DR":"🇨🇩","Austria":"🇦🇹",
-  "England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","Poland":"🇵🇱","Serbia":"🇷🇸","Romania":"🇷🇴",
-  "Croatia":"🇭🇷","Sweden":"🇸🇪","Nigeria":"🇳🇬","Ghana":"🇬🇭",
-  "Cameroon":"🇨🇲","Algeria":"🇩🇿","Mali":"🇲🇱","West Germany":"🇩🇪",
-  "Soviet Union":"🇷🇺","Yugoslavia":"🇷🇸","Czechoslovakia":"🇨🇿",
+  "Algeria":"🇩🇿","Angola":"🇦🇴","Argentina":"🇦🇷","Australia":"🇦🇺","Austria":"🇦🇹",
+  "Belgium":"🇧🇪","Bosnia and Herzegovina":"🇧🇦","Brazil":"🇧🇷","Canada":"🇨🇦",
+  "Cape Verde":"🇨🇻","Colombia":"🇨🇴","Congo DR":"🇨🇩","Curacao":"🇨🇼","Czechia":"🇨🇿",
+  "Denmark":"🇩🇰","Ecuador":"🇪🇨","Egypt":"🇪🇬","England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","France":"🇫🇷",
+  "Germany":"🇩🇪","Haiti":"🇭🇹","Iran":"🇮🇷","Iraq":"🇮🇶","Ivory Coast":"🇨🇮",
+  "Japan":"🇯🇵","Jordan":"🇯🇴","Mexico":"🇲🇽","Morocco":"🇲🇦","Netherlands":"🇳🇱",
+  "New Zealand":"🇳🇿","Norway":"🇳🇴","Panama":"🇵🇦","Paraguay":"🇵🇾","Portugal":"🇵🇹",
+  "Qatar":"🇶🇦","Saudi Arabia":"🇸🇦","Scotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","Senegal":"🇸🇳",
+  "South Africa":"🇿🇦","South Korea":"🇰🇷","Spain":"🇪🇸","Switzerland":"🇨🇭",
+  "Tunisia":"🇹🇳","Turkiye":"🇹🇷","Ukraine":"🇺🇦","United States":"🇺🇸",
+  "Uruguay":"🇺🇾","Uzbekistan":"🇺🇿",
 };
 
-function flag(name){ return FLAGS[name] || "🏳️"; }
+const TEAMS = {{ teams|tojson }};
+let selectedA = "", selectedB = "", activeModal = "";
 
-function abbr(name){
-  const m={"United States":"USA","South Africa":"RSA","South Korea":"KOR",
-    "Bosnia and Herzegovina":"BIH","Saudi Arabia":"KSA","Cape Verde":"CPV",
-    "Congo DR":"COD","Ivory Coast":"CIV","New Zealand":"NZL","Czechia":"CZE",
-    "West Germany":"GER","Soviet Union":"URS","Yugoslavia":"YUG"};
-  return m[name]||name.slice(0,3).toUpperCase();
+function flag(n){ return FLAGS[n]||"🏳️"; }
+function abbr(n){
+  const m={"United States":"USA","South Africa":"RSA","South Korea":"KOR","Bosnia and Herzegovina":"BIH",
+    "Saudi Arabia":"KSA","Cape Verde":"CPV","Congo DR":"COD","Ivory Coast":"CIV",
+    "New Zealand":"NZL","Czechia":"CZE"};
+  return m[n]||(n.length>8?n.slice(0,3).toUpperCase():n.toUpperCase());
 }
 
-// ── ADD FLAGS TO SELECT OPTIONS ──
-function decorateSelects(){
-  ["team-a","team-b"].forEach(id=>{
-    document.querySelectorAll(`#${id} option`).forEach(opt=>{
-      if(opt.value && FLAGS[opt.value]){
-        opt.textContent = FLAGS[opt.value] + " " + opt.value;
-      }
-    });
-  });
+// ── MODAL ──
+function openModal(side){
+  activeModal = side;
+  document.getElementById('modal-title').textContent = side==='a'?'SELECT TEAM A':'SELECT TEAM B';
+  document.getElementById('modal-search').value='';
+  renderModalList(TEAMS);
+  document.getElementById('modal-overlay').classList.add('open');
+  document.getElementById('modal-sheet').classList.add('open');
+  setTimeout(()=>document.getElementById('modal-search').focus(),400);
 }
 
-// ── LOAD MATCH CARDS ──
-async function loadMatchCards(){
-  const strip = document.getElementById("matches-strip");
-  const label = document.getElementById("strip-label");
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.getElementById('modal-sheet').classList.remove('open');
+}
+
+function filterModal(){
+  const q = document.getElementById('modal-search').value.toLowerCase();
+  renderModalList(TEAMS.filter(t=>t.toLowerCase().includes(q)));
+}
+
+function renderModalList(teams){
+  document.getElementById('modal-list').innerHTML = teams.map(t=>`
+    <button onclick="selectTeam('${activeModal}','${t.replace(/'/g,"\\'")}');"
+      class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-high active:scale-95 transition-all text-left ${(activeModal==='a'&&selectedA===t)||(activeModal==='b'&&selectedB===t)?'bg-tertiary/10 border border-tertiary/30':''}">
+      <span class="text-2xl">${flag(t)}</span>
+      <span class="font-medium text-on-surface">${t}</span>
+      ${(activeModal==='a'&&selectedA===t)||(activeModal==='b'&&selectedB===t)?'<span class="ml-auto material-symbols-outlined text-tertiary text-sm">check_circle</span>':''}
+    </button>`).join('');
+}
+
+function selectTeam(side, team){
+  if(side==='a'){ selectedA=team; document.getElementById('flag-display-a').textContent=flag(team); document.getElementById('name-display-a').textContent=team; document.getElementById('circle-a').style.borderColor='rgba(241,193,16,0.6)'; }
+  else           { selectedB=team; document.getElementById('flag-display-b').textContent=flag(team); document.getElementById('name-display-b').textContent=team; document.getElementById('circle-b').style.borderColor='rgba(175,198,255,0.6)'; }
+  closeModal();
+}
+
+// ── MATCH CARDS ──
+async function loadMatches(){
   try{
-    const res  = await fetch("/schedule/today");
+    const res  = await fetch('/schedule/today');
     const data = await res.json();
+    const strip = document.getElementById('matches-strip');
+    const title = document.getElementById('matches-title');
+    let selectedCardId = null;
 
-    if(data.type==="today"){
-      label.textContent = "Today's Matches — Click a card to predict";
-    } else if(data.type==="upcoming"){
-      const d = new Date(data.date+"T12:00:00");
-      label.textContent = "Upcoming · " + d.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
-    } else {
-      label.textContent = "Recent Matches";
-    }
+    if(data.type==='today') title.textContent="Today's Matches";
+    else if(data.type==='upcoming'){
+      const d=new Date(data.date+'T12:00:00');
+      title.textContent="Upcoming · "+d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    } else title.textContent="Recent Matches";
 
-    if(!data.matches||data.matches.length===0){
-      strip.innerHTML = "<p class='text-on-surface-variant text-body-sm'>No matches found.</p>";
-      return;
-    }
+    if(!data.matches||data.matches.length===0){ strip.innerHTML="<p class='text-on-surface-variant text-sm px-4'>No matches found.</p>"; return; }
 
     strip.innerHTML = data.matches.slice(0,6).map((m,i)=>{
-      const isHighlight = i===1||(data.matches.length===1);
-      const cardClass = isHighlight
-        ? "flex-shrink-0 w-[300px] md:w-[340px] bg-tertiary-container/10 border border-tertiary/40 p-md rounded-xl snap-center relative group hover:border-tertiary transition-all cursor-pointer"
-        : "flex-shrink-0 w-[300px] md:w-[340px] glass-panel p-md rounded-xl snap-center relative overflow-hidden group hover:border-primary/50 transition-all cursor-pointer";
+      const isLive = m.status==='IN_PLAY'||m.status==='PAUSED';
+      const hasSco = m.home_score!=null&&m.away_score!=null;
+      const cardId = `mc-${i}`;
 
-      const statusHtml = isHighlight
-        ? `<span class="text-tertiary font-label-bold text-[10px]">TODAY · ${m.time} ET</span>`
-        : `<span class="text-on-surface-variant font-label-bold text-[10px]">UPCOMING · ${m.time} ET</span>`;
+      const statusBadge = isLive
+        ? `<div class="px-2 py-0.5 rounded-full bg-live-red/20 text-live-red text-[10px] font-bold flex items-center gap-1 pulse-live"><span class="w-1.5 h-1.5 rounded-full bg-live-red"></span>LIVE</div>`
+        : m.status==='FINISHED'
+        ? `<span class="text-[10px] font-bold text-on-surface-variant">FULL TIME</span>`
+        : `<span class="text-[10px] font-bold text-on-surface-variant">${m.time} ET</span>`;
 
-      const venueHtml = isHighlight
-        ? `<div class="text-[10px] text-tertiary/80 uppercase font-bold">${m.venue}</div>`
-        : "";
+      const scoreOrVs = (isLive||m.status==='FINISHED')&&hasSco
+        ? `<span class="font-scoreboard-num text-scoreboard-num text-primary">${m.home_score} - ${m.away_score}</span>`
+        : `<span class="font-scoreboard-num text-scoreboard-num text-on-surface-variant text-2xl">VS</span>`;
 
-      return `
-        <div class="${cardClass}" onclick="fillTeams('${m.home.replace(/'/g,"\\'")}','${m.away.replace(/'/g,"\\'")}')">
-          <div class="flex justify-between items-center mb-xs">
-            ${statusHtml}
-            <span class="text-on-surface-variant text-[10px] font-label-bold">${m.group}</span>
+      return `<div id="${cardId}" class="flex-none w-[300px] glass-panel rounded-2xl p-card-padding card-hover transition-all cursor-pointer ${isLive?'border border-live-red/30':''}" onclick="pickMatch('${m.home.replace(/'/g,"\\'")}','${m.away.replace(/'/g,"\\'")}','${cardId}')">
+        <div class="flex items-center justify-between mb-2">
+          ${statusBadge}
+          <span class="font-label-caps text-[10px] text-on-surface-variant">${m.group}</span>
+        </div>
+        <div class="flex items-center gap-1 mb-3">
+          <span class="material-symbols-outlined text-tertiary text-[14px]">stadium</span>
+          <span class="text-[11px] text-tertiary font-semibold truncate">${m.venue}</span>
+        </div>
+        <div class="flex justify-between items-center mb-4">
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-4xl">${flag(m.home)}</span>
+            <span class="font-bold text-sm">${abbr(m.home)}</span>
           </div>
-          <div class="flex justify-between items-center">
-            <div class="flex flex-col items-center gap-xs">
-              <span class="text-[32px]">${flag(m.home)}</span>
-              <span class="font-headline-sm text-headline-sm">${abbr(m.home)}</span>
-            </div>
-            <div class="text-center">
-              <div class="text-on-surface-variant text-[12px] font-medium mb-1">VS</div>
-              ${venueHtml}
-            </div>
-            <div class="flex flex-col items-center gap-xs">
-              <span class="text-[32px]">${flag(m.away)}</span>
-              <span class="font-headline-sm text-headline-sm">${abbr(m.away)}</span>
-            </div>
+          <div class="text-center">${scoreOrVs}</div>
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-4xl">${flag(m.away)}</span>
+            <span class="font-bold text-sm">${abbr(m.away)}</span>
           </div>
-        </div>`;
-    }).join("");
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bg-surface-container rounded-lg p-2 text-center border border-white/5">
+            <div class="text-[10px] text-on-surface-variant mb-1">GROUP</div>
+            <div class="font-odds-val text-odds-val text-primary text-sm">${m.group.replace('Group ','')}</div>
+          </div>
+          <div class="bg-surface-container rounded-lg p-2 text-center border border-white/5">
+            <div class="text-[10px] text-on-surface-variant mb-1">TAP TO PREDICT</div>
+            <div class="text-tertiary text-sm">⚡</div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
 
-  }catch(e){
-    label.textContent = "Could not load schedule";
-    strip.innerHTML = "";
-  }
+  }catch(e){ document.getElementById('matches-title').textContent="Matches"; }
 }
 
-function fillTeams(home, away){
-  const selA = document.getElementById("team-a");
-  const selB = document.getElementById("team-b");
-  for(let o of selA.options){ if(o.value===home){ selA.value=home; break; } }
-  for(let o of selB.options){ if(o.value===away){ selB.value=away; break; } }
-  document.querySelector(".glass-panel").scrollIntoView({behavior:"smooth"});
+let lastSelectedCard = null;
+function pickMatch(home, away, cardId){
+  if(lastSelectedCard) document.getElementById(lastSelectedCard)?.classList.remove('selected-card');
+  document.getElementById(cardId)?.classList.add('selected-card');
+  lastSelectedCard = cardId;
+  selectTeam('a', home);
+  selectTeam('b', away);
+  const msg = document.getElementById('match-selected-msg');
+  msg.classList.remove('hidden');
+  setTimeout(()=>msg.classList.add('hidden'), 3000);
+  document.getElementById('prediction-section').scrollIntoView({behavior:'smooth'});
 }
 
-// ── PREDICT ──
-document.getElementById("predictBtn").addEventListener("click", async function(){
-  const btn     = this;
-  const errEl   = document.getElementById("error-msg");
-  const results = document.getElementById("resultsSection");
-  const teamA   = document.getElementById("team-a").value;
-  const teamB   = document.getElementById("team-b").value;
+// ── PREDICTION ──
+const LOADING_MSGS = [
+  "Analyzing historical matches…",
+  "Calculating team form…",
+  "Comparing head-to-head records…",
+  "Generating prediction…",
+];
 
-  errEl.classList.add("hidden");
-  results.classList.add("hidden");
+async function runPrediction(){
+  const btn = document.getElementById('predict-btn');
+  const err = document.getElementById('pred-error');
+  const loadSeq = document.getElementById('loading-seq');
+  const results = document.getElementById('results-section');
 
-  if(!teamA||!teamB){ showError("Please select both teams."); return; }
-  if(teamA===teamB){ showError("Please select two different teams."); return; }
+  err.classList.add('hidden');
+  results.classList.add('hidden');
 
-  btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> ANALYSING DATA…';
-  btn.disabled  = true;
+  if(!selectedA||!selectedB){ showError('Please select both teams.'); return; }
+  if(selectedA===selectedB){ showError('Please select two different teams.'); return; }
+
+  // Start loading animation
+  btn.classList.add('hidden');
+  loadSeq.classList.remove('hidden');
+
+  // Cycle through loading messages
+  let msgIdx = 0;
+  const msgEl = document.getElementById('loading-msg');
+  const barEl = document.getElementById('loading-bar');
+  msgEl.textContent = LOADING_MSGS[0];
+  barEl.style.width = '10%';
+
+  const msgInterval = setInterval(()=>{
+    msgIdx++;
+    if(msgIdx<LOADING_MSGS.length){
+      msgEl.textContent = LOADING_MSGS[msgIdx];
+      barEl.style.width = (20+msgIdx*25)+'%';
+    }
+  }, 600);
 
   try{
     const [predRes, h2hRes] = await Promise.all([
-      fetch("/predict",{method:"POST",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({home_team:teamA,away_team:teamB})}),
-      fetch(`/head-to-head?home=${encodeURIComponent(teamA)}&away=${encodeURIComponent(teamB)}`)
+      fetch('/predict',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({home_team:selectedA,away_team:selectedB})}),
+      fetch(`/head-to-head?home=${encodeURIComponent(selectedA)}&away=${encodeURIComponent(selectedB)}`)
     ]);
-
     const pred = await predRes.json();
     const h2h  = await h2hRes.json();
 
-    if(pred.error){ showError(pred.error); return; }
+    clearInterval(msgInterval);
+    barEl.style.width='100%';
 
+    if(pred.error){ showError(pred.error); btn.classList.remove('hidden'); loadSeq.classList.add('hidden'); return; }
+
+    await new Promise(r=>setTimeout(r,400));
+    loadSeq.classList.add('hidden');
+    btn.classList.remove('hidden');
     renderResults(pred, h2h);
 
   }catch(e){
-    showError("Connection error. Make sure the server is running.");
-  }finally{
-    btn.innerHTML = '<span class="material-symbols-outlined" style="font-variation-settings:\'FILL\' 1;">bolt</span> PREDICT MATCH';
-    btn.disabled  = false;
+    clearInterval(msgInterval);
+    loadSeq.classList.add('hidden');
+    btn.classList.remove('hidden');
+    showError('Connection error. Check server.');
   }
-});
+}
 
 function renderResults(pred, h2h){
+  const colors = {Win:"#24D676",Draw:"#f1c110",Loss:"#FF3B30"};
+  const r = pred.prediction;
+
   // Headline
-  const outcomeColors = {Win:"#00E676", Draw:"#f1c110", Loss:"#ffb3ae"};
-  document.getElementById("result-headline").textContent =
-    `${flag(pred.home_team)} ${pred.home_team.toUpperCase()} ${pred.prediction.toUpperCase()}`;
-  document.getElementById("result-headline").style.color = outcomeColors[pred.prediction]||"#afc6ff";
-  document.getElementById("result-matchup").textContent  =
-    `${pred.home_team} vs ${pred.away_team} (Home Team Perspective)`;
-  document.getElementById("result-confidence").textContent = `${pred.confidence}% confidence`;
+  document.getElementById('r-headline').textContent = `${flag(pred.home_team)} ${pred.home_team.toUpperCase()} ${r.toUpperCase()}`;
+  document.getElementById('r-headline').style.color = colors[r]||'#afc6ff';
+  document.getElementById('r-matchup').textContent = `${pred.home_team} vs ${pred.away_team}`;
+  document.getElementById('r-confidence').textContent = `${pred.confidence}% confidence`;
 
   // Bars
   const p = pred.probabilities;
   setTimeout(()=>{
-    document.getElementById("bar-win").style.width  = (p["Win"]||0)+"%";
-    document.getElementById("bar-draw").style.width = (p["Draw"]||0)+"%";
-    document.getElementById("bar-loss").style.width = (p["Loss"]||0)+"%";
-    document.getElementById("bar-pct-win").textContent  = (p["Win"]||0)+"%";
-    document.getElementById("bar-pct-draw").textContent = (p["Draw"]||0)+"%";
-    document.getElementById("bar-pct-loss").textContent = (p["Loss"]||0)+"%";
-    document.getElementById("bar-label-win").textContent  = `${pred.home_team.toUpperCase()} WIN`;
-    document.getElementById("bar-label-loss").textContent = `${pred.away_team.toUpperCase()} WIN`;
-  },80);
+    document.getElementById('bar-win').style.width  = (p['Win']||0)+'%';
+    document.getElementById('bar-draw').style.width = (p['Draw']||0)+'%';
+    document.getElementById('bar-loss').style.width = (p['Loss']||0)+'%';
+    document.getElementById('bar-pct-win').textContent  = (p['Win']||0)+'%';
+    document.getElementById('bar-pct-draw').textContent = (p['Draw']||0)+'%';
+    document.getElementById('bar-pct-loss').textContent = (p['Loss']||0)+'%';
+    document.getElementById('bar-label-win').textContent  = pred.home_team.toUpperCase()+' WIN';
+    document.getElementById('bar-label-loss').textContent = pred.away_team.toUpperCase()+' WIN';
+  },100);
 
-  // Stat cards
-  document.getElementById("elo-label-a").textContent   = abbr(pred.home_team);
-  document.getElementById("elo-label-b").textContent   = abbr(pred.away_team);
-  document.getElementById("elo-val-a").textContent     = pred.home_stats.elo;
-  document.getElementById("elo-val-b").textContent     = pred.away_stats.elo;
-  document.getElementById("goals-label-a").textContent = abbr(pred.home_team);
-  document.getElementById("goals-label-b").textContent = abbr(pred.away_team);
-  document.getElementById("goals-val-a").textContent   = pred.home_stats.goal_avg;
-  document.getElementById("goals-val-b").textContent   = pred.away_stats.goal_avg;
+  // Stats
+  document.getElementById('elo-name-a').textContent   = abbr(pred.home_team);
+  document.getElementById('elo-name-b').textContent   = abbr(pred.away_team);
+  document.getElementById('elo-val-a').textContent    = pred.home_stats.elo;
+  document.getElementById('elo-val-b').textContent    = pred.away_stats.elo;
+  document.getElementById('goals-name-a').textContent = abbr(pred.home_team);
+  document.getElementById('goals-name-b').textContent = abbr(pred.away_team);
+  document.getElementById('goals-val-a').textContent  = pred.home_stats.goal_avg;
+  document.getElementById('goals-val-b').textContent  = pred.away_stats.goal_avg;
 
   // H2H
-  document.getElementById("h2h-summary").textContent =
-    `${h2h.home_wins}W – ${h2h.draws}D – ${h2h.away_wins}W  (${h2h.total} matches)`;
-
-  const tbody = document.getElementById("h2h-tbody");
+  document.getElementById('h2h-summary').textContent =
+    `${h2h.home_wins}W – ${h2h.draws}D – ${h2h.away_wins}W`;
+  const tbody = document.getElementById('h2h-tbody');
   if(!h2h.matches||h2h.matches.length===0){
-    tbody.innerHTML = `<tr><td colspan="5" class="px-lg py-md text-on-surface-variant">No previous encounters found</td></tr>`;
+    tbody.innerHTML=`<tr><td colspan="5" class="px-4 py-4 text-center text-on-surface-variant text-sm">No previous encounters</td></tr>`;
   } else {
     tbody.innerHTML = h2h.matches.map(m=>{
-      const rc = m.Outcome==="Win"
-        ? "text-primary font-bold"
-        : m.Outcome==="Draw"
-        ? "text-on-surface-variant"
-        : "text-secondary font-bold";
-      const label = m.Outcome==="Win"
-        ? `${m["Home Team Name"].toUpperCase()} WIN`
-        : m.Outcome==="Draw" ? "DRAW"
-        : `${m["Away Team Name"].toUpperCase()} WIN`;
+      const rc = m.Outcome==='Win'?'text-pitch-green font-bold':m.Outcome==='Draw'?'text-on-surface-variant':'text-live-red font-bold';
+      const lb = m.Outcome==='Win'?m['Home Team Name'].toUpperCase()+' WIN':m.Outcome==='Draw'?'DRAW':m['Away Team Name'].toUpperCase()+' WIN';
       return `<tr class="hover:bg-white/5 transition-colors">
-        <td class="px-lg py-md">${m.Year||"—"}</td>
-        <td class="px-lg py-md">${m["Home Team Name"]}</td>
-        <td class="px-lg py-md font-stats-number">${m["Home Team Goals"]} – ${m["Away Team Goals"]}</td>
-        <td class="px-lg py-md">${m["Away Team Name"]}</td>
-        <td class="px-lg py-md text-right"><span class="${rc}">${label}</span></td>
+        <td class="px-4 py-3">${m.Year||'—'}</td>
+        <td class="px-4 py-3 text-sm">${m['Home Team Name']}</td>
+        <td class="px-4 py-3 text-center font-bold">${m['Home Team Goals']}–${m['Away Team Goals']}</td>
+        <td class="px-4 py-3 text-sm">${m['Away Team Name']}</td>
+        <td class="px-4 py-3 text-right text-xs"><span class="${rc}">${lb}</span></td>
       </tr>`;
-    }).join("");
+    }).join('');
   }
 
-  // Show results
-  const sec = document.getElementById("resultsSection");
-  sec.classList.remove("hidden");
-  sec.scrollIntoView({behavior:"smooth",block:"start"});
+  // Show with animation
+  const sec = document.getElementById('results-section');
+  sec.classList.remove('hidden');
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function showError(msg){
-  const e = document.getElementById("error-msg");
+  const e = document.getElementById('pred-error');
   e.textContent = msg;
-  e.classList.remove("hidden");
+  e.classList.remove('hidden');
 }
 
-// Horizontal scroll with mouse wheel
-const strip = document.getElementById("matches-strip");
-strip.addEventListener("wheel",(e)=>{ e.preventDefault(); strip.scrollLeft+=e.deltaY; });
+// Horizontal scroll with mousewheel
+const strip = document.getElementById('matches-strip');
+if(strip) strip.addEventListener('wheel',(e)=>{e.preventDefault();strip.scrollLeft+=e.deltaY;});
 
-// ── INIT ──
-decorateSelects();
-loadMatchCards();
+// Init
+loadMatches();
 </script>
 </body>
 </html>
